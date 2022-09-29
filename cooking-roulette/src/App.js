@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 
-import { getPosts } from './actions/posts';
+import { getPosts } from "./actions/posts";
 import Posts from "./components/Posts/Posts";
 import Form from "./components/Form/Form";
 import logo from "./images/logo.png";
@@ -12,9 +12,11 @@ const App = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const [currentId, setCurrentId] = useState(null);
+
   useEffect(() => {
     dispatch(getPosts());
-  }, [dispatch]);
+  }, [dispatch, currentId]);
 
   return (
     <Container maxWidth="lg">
@@ -28,15 +30,16 @@ const App = () => {
         <Container>
           <Grid
             container
+            className={classes.mainContainer}
             justifyContent="space-between"
             alignItems="stretch"
             spacing={3}
           >
             <Grid item xs={12} sm={7}>
-              <Posts />
+              <Posts setCurrentId={setCurrentId} />
             </Grid>
-            <Grid item xs={12} sm={7}>
-              <Form />
+            <Grid item xs={12} sm={4}>
+              <Form currentId={currentId} setCurrentId={setCurrentId} />
             </Grid>
           </Grid>
         </Container>
