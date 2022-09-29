@@ -32,6 +32,15 @@ const Form = ({ currentId, setCurrentId }) => {
 
     return setPostData({
       ...postData,
+      [name]: value,
+    });
+  };
+
+  const tagHandler = (e) => {
+    const { value, name } = e.target;
+
+    return setPostData({
+      ...postData,
       [name]: value.split(','),
     });
   };
@@ -110,7 +119,7 @@ const Form = ({ currentId, setCurrentId }) => {
           label="Tags"
           fullWidth={true}
           value={postData.tags}
-          onChange={handler}
+          onChange={tagHandler}
         />
         <div className={classes.fileInput}>
           <FileBase type="file" multiple={false} onDone={fileHandler} />
