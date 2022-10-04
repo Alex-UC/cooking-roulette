@@ -1,2 +1,2 @@
-# coocking-roulette
+# cooking-roulette
 MERN app - basic functionalities
